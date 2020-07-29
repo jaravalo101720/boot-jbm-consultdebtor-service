@@ -41,7 +41,7 @@ public class ConsultdebtorServiceImpl {
 			
 			saveTransaction(idTransaccion, operador, servicio, documentoNro, accion, addInfo, generalInfo);
 		}else {
-			throw new AppServiceException("403", "Usted a llegado al limite de consultar diarias");
+			throw new AppServiceException("403", "Usted a llegado al limite de consultas diarias");
 		}
 		
 		return response;
@@ -78,10 +78,10 @@ public class ConsultdebtorServiceImpl {
 	
 	private void saveTransaction(String idTransaccion, String operador, String servicio, String documentoNro, String accion, AddInfoResponse addInfo, GeneralInfoResponse generalInfo) {
 		try {
-			jdbcTemplate.update("insert into tbl_consultdebtor_transaction(id_transaction,operador,service,document_nro,debt_status,action,code)values(?,?,?,?,?,?,?)",
-					idTransaccion, operador, servicio, documentoNro, accion, addInfo.getEstadoDeuda(), generalInfo.getCode() );
+			jdbcTemplate.update("insert into tbl_consultdebtor_transaction(id_transaction,operator,service,document_nro,debt_status,action,code)values(?,?,?,?,?,?,?)",
+					idTransaccion, operador, servicio, documentoNro, addInfo.getEstadoDeuda(), accion, generalInfo.getCode() );
 		} catch (Exception e) {
-			throw new AppServiceException("401", "ERROR en registrar la transaccion");
+			throw new AppServiceException("401", "ERROR en registrar la transaccion " + e.getMessage());
 		}
 	}
 	
