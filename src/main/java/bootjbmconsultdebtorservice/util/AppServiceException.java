@@ -1,5 +1,6 @@
 package bootjbmconsultdebtorservice.util;
 
+
 public class AppServiceException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 	private String code;
